@@ -2,15 +2,15 @@
 -- By Avi
 -- Version 1.0
 
-local Aether = {}
-Aether.__index = Aether
+local Library = {}
+Library.__index = Library
 
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 
-Aether.Themes = {
+Library.Themes = {
     Default = {
         MainColor = Color3.fromRGB(85, 170, 255),
         Background = Color3.fromRGB(0, 0, 0),
@@ -30,7 +30,7 @@ Aether.Themes = {
     }
 }
 
-function Aether:CreateWindow(title, options)
+function Library:CreateWindow(title, options)
     options = options or {}
     local mainColor = options.main_color or self.Themes.Default.MainColor
     local windowSize = options.main_size or UDim2.new(0, 600, 0, 400)
@@ -187,7 +187,7 @@ function Aether:CreateWindow(title, options)
     return window
 end
 
-function Aether:AddTab(name)
+function Library:AddTab(name)
     local tabButton = Instance.new("TextButton")
     tabButton.Size = UDim2.new(0, 80, 1, 0)
     tabButton.Position = UDim2.new(0, (#self.Tabs)*80, 0, 0)
@@ -245,7 +245,7 @@ function Aether:AddTab(name)
     return tab
 end
 
-function Aether:AddLabel(tab, text)
+function Library:AddLabel(tab, text)
     local label = Instance.new("TextLabel")
     label.Size = UDim2.new(1, 0, 0, 20)
     label.BackgroundTransparency = 1
@@ -260,7 +260,7 @@ function Aether:AddLabel(tab, text)
     return label
 end
 
-function Aether:AddButton(tab, text, callback)
+function Library:AddButton(tab, text, callback)
     local button = Instance.new("TextButton")
     button.Size = UDim2.new(1, 0, 0, 30)
     button.BackgroundColor3 = self.Themes.Default.ButtonColor
@@ -295,7 +295,7 @@ function Aether:AddButton(tab, text, callback)
     return button
 end
 
-function Aether:AddToggle(tab, text, default, callback)
+function Library:AddToggle(tab, text, default, callback)
     local toggleFrame = Instance.new("Frame")
     toggleFrame.Size = UDim2.new(1, 0, 0, 25)
     toggleFrame.BackgroundTransparency = 1
@@ -380,7 +380,7 @@ function Aether:AddToggle(tab, text, default, callback)
     return toggle
 end
 
-function Aether:AddTextBox(tab, placeholder, callback)
+function Library:AddTextBox(tab, placeholder, callback)
     local textBoxFrame = Instance.new("Frame")
     textBoxFrame.Size = UDim2.new(1, 0, 0, 30)
     textBoxFrame.BackgroundColor3 = self.Themes.Default.TextBox
@@ -411,7 +411,7 @@ function Aether:AddTextBox(tab, placeholder, callback)
     return textBox
 end
 
-function Aether:AddKeybind(tab, text, default, callback)
+function Library:AddKeybind(tab, text, default, callback)
     local keybindFrame = Instance.new("Frame")
     keybindFrame.Size = UDim2.new(1, 0, 0, 20)
     keybindFrame.BackgroundTransparency = 1
@@ -478,7 +478,7 @@ function Aether:AddKeybind(tab, text, default, callback)
     return keybind
 end
 
-function Aether:AddDropdown(tab, text, options, default, callback)
+function Library:AddDropdown(tab, text, options, default, callback)
     local BTN_H = 30
     local ITEM_H = 25
     local PAD = 2
@@ -614,7 +614,7 @@ function Aether:AddDropdown(tab, text, options, default, callback)
     return dropdown
 end
 
-function Aether:AddFolder(tab, text)
+function Library:AddFolder(tab, text)
     local folderFrame = Instance.new("Frame")
     folderFrame.Size = UDim2.new(1, 0, 0, 30)
     folderFrame.BackgroundColor3 = self.Themes.Default.Folder
@@ -700,7 +700,7 @@ function Aether:AddFolder(tab, text)
     return contentFrame
 end
 
-function Aether:AddParagraph(tab, text, liveUpdate)
+function Library:AddParagraph(tab, text, liveUpdate)
     local paragraphFrame = Instance.new("Frame")
     paragraphFrame.Size = UDim2.new(1, 0, 0, 80)
     paragraphFrame.BackgroundColor3 = self.Themes.Default.Folder
@@ -744,7 +744,7 @@ function Aether:AddParagraph(tab, text, liveUpdate)
     return paragraph
 end
 
-function Aether:Notify(title, message, duration)
+function Library:Notify(title, message, duration)
     duration = duration or 4
 
     local screenGui = game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("AetherNotifyGui")
@@ -850,7 +850,7 @@ function Aether:Notify(title, message, duration)
     end)
 end
 
-function Aether:ApplyTheme(theme)
+function Library:ApplyTheme(theme)
     self.MainColor = theme.MainColor or self.Themes.Default.MainColor
     
     self.TabIndicator.BackgroundColor3 = self.MainColor
