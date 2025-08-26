@@ -1,16 +1,13 @@
 local Library = {}
 
--- Services
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 
--- Variables
 local player = Players.LocalPlayer
 local mouse = player:GetMouse()
 
--- Utility functions
 local function createRoundedCorner(parent, radius)
     local corner = Instance.new("UICorner")
     corner.CornerRadius = UDim.new(0, radius or 8)
@@ -26,7 +23,6 @@ local function createStroke(parent, color, thickness)
     return stroke
 end
 
--- Library implementation
 Library.Windows = {}
 Library.NotificationQueue = {}
 
@@ -39,13 +35,11 @@ function Library:AddWindow(options)
         CurrentTab = nil
     }
     
-    -- Create screen GUI
     local screenGui = Instance.new("ScreenGui")
     screenGui.Name = "AetherUILibrary"
     screenGui.Parent = player:WaitForChild("PlayerGui")
     screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     
-    -- Main frame
     local mainFrame = Instance.new("Frame")
     mainFrame.Size = UDim2.new(0, window.Size.X, 0, window.Size.Y)
     mainFrame.Position = UDim2.new(0.5, -window.Size.X/2, 0.5, -window.Size.Y/2)
@@ -57,7 +51,6 @@ function Library:AddWindow(options)
     mainFrame.Draggable = true
     createRoundedCorner(mainFrame)
     
-    -- Title bar
     local titleBar = Instance.new("Frame")
     titleBar.Size = UDim2.new(1, 0, 0, 30)
     titleBar.Position = UDim2.new(0, 0, 0, 0)
@@ -77,7 +70,6 @@ function Library:AddWindow(options)
     title.TextXAlignment = Enum.TextXAlignment.Left
     title.Parent = titleBar
     
-    -- Close button
     local close = Instance.new("ImageButton")
     close.Name = "Close"
     close.Parent = titleBar
@@ -108,7 +100,6 @@ function Library:AddWindow(options)
         mainFrame:Destroy()
     end)
     
-    -- Separator
     local separator = Instance.new("Frame")
     separator.Size = UDim2.new(1, -16, 0, 1)
     separator.Position = UDim2.new(0, 8, 0, 30)
@@ -117,14 +108,12 @@ function Library:AddWindow(options)
     separator.BorderSizePixel = 0
     separator.Parent = mainFrame
     
-    -- Tab container
     local tabContainer = Instance.new("Frame")
     tabContainer.Size = UDim2.new(1, -16, 0, 30)
     tabContainer.Position = UDim2.new(0, 8, 0, 31)
     tabContainer.BackgroundTransparency = 1
     tabContainer.Parent = mainFrame
     
-    -- Tab indicator
     local tabIndicator = Instance.new("Frame")
     tabIndicator.Size = UDim2.new(0, 80, 0, 2)
     tabIndicator.Position = UDim2.new(0, 0, 1, 0)
@@ -132,14 +121,12 @@ function Library:AddWindow(options)
     tabIndicator.BorderSizePixel = 0
     tabIndicator.Parent = tabContainer
     
-    -- Content area
     local contentArea = Instance.new("Frame")
     contentArea.Size = UDim2.new(1, -16, 1, -80)
     contentArea.Position = UDim2.new(0, 8, 0, 65)
     contentArea.BackgroundTransparency = 1
     contentArea.Parent = mainFrame
     
-    -- Footer
     local footer = Instance.new("Frame")
     footer.Size = UDim2.new(1, -16, 0, 30)
     footer.Position = UDim2.new(0, 8, 1, -35)
@@ -148,7 +135,6 @@ function Library:AddWindow(options)
     footer.Parent = mainFrame
     createRoundedCorner(footer, 4)
     
-    -- User info in footer
     local userThumbnail = Instance.new("ImageLabel")
     userThumbnail.Size = UDim2.new(0, 20, 0, 20)
     userThumbnail.Position = UDim2.new(0, 5, 0.5, -10)
@@ -173,7 +159,6 @@ function Library:AddWindow(options)
     userName.TextXAlignment = Enum.TextXAlignment.Left
     userName.Parent = footer
     
-    -- Window methods
     function window:AddTab(name)
         local tab = {
             Name = name,
@@ -181,7 +166,6 @@ function Library:AddWindow(options)
             Container = nil
         }
         
-        -- Create tab button
         local tabIndex = #window.Tabs + 1
         local tabButton = Instance.new("TextButton")
         tabButton.Size = UDim2.new(0, 80, 1, 0)
@@ -210,14 +194,12 @@ function Library:AddWindow(options)
         
         tab.Container = tabContent
         
-        -- Tab selection logic
         tabButton.MouseButton1Click:Connect(function()
             for _, t in ipairs(window.Tabs) do
                 t.Container.Visible = false
             end
             tabContent.Visible = true
             
-            -- Move indicator
             local tween = TweenService:Create(tabIndicator, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
                 Position = UDim2.new(0, (tabIndex-1)*80, 1, 0)
             })
