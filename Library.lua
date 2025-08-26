@@ -27,6 +27,7 @@ Library.Windows = {}
 Library.NotificationQueue = {}
 
 function Library:AddWindow(options)
+    options = options or {}
     local window = {
         Name = options.name or "UI Library",
         MainColor = options.main_color or Color3.fromRGB(85, 170, 255),
