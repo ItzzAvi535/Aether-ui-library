@@ -1,0 +1,39 @@
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/ItzzAvi535/Aether-ui-library/refs/heads/main/Library.lua", true))()
+
+local window = library:AddWindow{
+    name = "My Awesome Script",
+    main_color = Color3.fromRGB(255, 0, 0),
+    main_size = Vector2.new(600, 340),
+}
+
+local Main = window:AddTab("Main")
+
+Main:AddLabel("This is a test label")
+
+Main:AddButton("Test Button", function()
+    print("Button clicked!")
+end)
+
+local Toggle = Main:AddToggle("Test Toggle", function(state)
+    print("Toggle state:", state)
+end)
+
+local Textbox = Main:AddTextBox("Test Textbox", function(text)
+    print("Text entered:", text)
+end)
+
+local Dropdown = Main:AddDropdown("Test Dropdown", function(text)
+    print("Dropdown selected:", text)
+end)
+Dropdown:Add("Option1")
+Dropdown:Add("Option2")
+Dropdown:Add("Option3")
+
+local Keybind = Main:AddKeybind("Test Keybind", function(key)
+    print("Keybind set to:", key.Name)
+end)
+
+local Paragraph = Main:AddParagraph("Hello World")
+Paragraph:SetContent("Updated!")
+
+library:Notify("Success", "Operation completed successfully!", 5)
