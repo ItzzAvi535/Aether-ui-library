@@ -3,7 +3,7 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/ItzzA
 local window = library:AddWindow{
     name = "My Awesome Script",
     main_color = Color3.fromRGB(255, 0, 0),
-    main_size = Vector2.new(600, 340),
+    main_size = Vector2.new(580, 340),
 }
 
 local Main = window:AddTab("Main")
