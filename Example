@@ -40,8 +40,8 @@ library:Notify("Success", "Operation completed successfully!", 5)
 
 local Settings = window:AddTab("Settings")
 
-Main:AddLabel("Welcome to the Settings tab!")
+Settings:AddLabel("Welcome to the Settings tab!")
 
-Main:AddButton("This is a Button", function()
+Settings:AddButton("This is a Button", function()
     print("Button clicked!")
 end)
